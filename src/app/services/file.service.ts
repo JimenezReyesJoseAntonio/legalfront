@@ -13,11 +13,11 @@ export class FileService {
     const formData = new FormData();
     formData.append('image', file);
 
-    return this.http.post<any>('http://localhost:8080/uploads/image', formData);
+    return this.http.post<any>('http://147.182.235.130/api2/uploads/image', formData);
   }
 
   getFile(filePath: string): Observable<Blob> {
-    return this.http.get(`http://localhost:8080/${filePath}`, { responseType: 'blob' });
+    return this.http.get(`http://147.182.235.130/api2/${filePath}`, { responseType: 'blob' });
   }
 
 }

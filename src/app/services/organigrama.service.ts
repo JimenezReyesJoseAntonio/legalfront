@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class OrganigramaService {
 
-  private apiUrl = 'http://localhost:8080/organigrama';
+  private apiUrl = 'http://147.182.235.130/api2/organigrama';
 
   constructor(private http: HttpClient) {}
 

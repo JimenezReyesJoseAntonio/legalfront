@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 })
 export class AuthService {
 
-  authURL = 'http://localhost:8080/auth/login';
+  authURL = 'http://147.182.235.130/api2/auth/login';
 
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;

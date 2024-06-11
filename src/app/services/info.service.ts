@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InfoService {
-   apiUrl = 'http://localhost:8080/informacion'; // Reemplaza esto con la URL de tu API
+   apiUrl = 'http://147.182.235.130/api2/informacion'; // Reemplaza esto con la URL de tu API
 
   constructor(private http: HttpClient) { }
 
