@@ -1,0 +1,89 @@
+<header *ngIf="!isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+    </div>
+    <nav class="horizontal-nav">
+        <a routerLink="/" class="nav-link">Inicio</a>
+        <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+        <div class="search-container">
+            <input type="text" placeholder="Search" class="search-input" [(ngModel)]="searchTerm">
+            <button class="search-button">Search</button>
+        </div>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+    </nav>
+</header>
+
+<header *ngIf="isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+    </div>
+    <nav class="horizontal-nav">
+        <a routerLink="/admin/home" class="nav-link">Inicio</a>
+        <a routerLink="/admin/blog" class="nav-link">Blog</a>
+        <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+        <div class="search-container">
+            <input type="text" placeholder="Search" class="search-input">
+            <button class="search-button">Search</button>
+        </div>
+        <a routerLink="/login" class="nav-link">Logout</a>
+        <a><i class="fa-solid fa-house"></i></a>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+    </nav>
+</header>
+
+
+
+<div class="publications-container">
+    <div *ngFor="let publication of publications" class="publication-card">
+        <img [src]="imagesCard[publication.id-1]?.url" alt="Publication Image" class="publication-image">
+        <h2 [ngClass]="{'highlight': shouldHighlight(publication.title)}">{{ publication.title }}</h2>
+        <p [ngClass]="{'highlight': shouldHighlight(publication.author)}">By {{ publication.author }}</p>
+        <p [ngClass]="{'highlight': shouldHighlight(publication.shortText)}">{{ publication.shortText }}</p>
+
+        <button (click)="openModal(publication)">Read More</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" [ngClass]="{'show': selectedPublication}">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <img [src]="selectedImageUrl" alt="Publication Image" class="modal-image">
+        <h2>{{ selectedPublication?.title }}</h2>
+        <p>By {{ selectedPublication?.author }}</p>
+        <p> {{ selectedPublication?.fullText}}</p>
+
+        <textarea  *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.title"></textarea>
+        <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.author"></textarea>
+        <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.shortText"></textarea>
+        <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.fullText"></textarea>
+        <button *ngIf="isAdmin && selectedPublication" (click)="editPublication(selectedPublication)">Save</button>
+        <input *ngIf="isAdmin && selectedPublication" type="file"
+            (change)="onFileChange($event, selectedPublication.id+5)">
+    </div>
+</div>
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <a><i class="fa-solid fa-location-arrow"></i>Dirección: Calle sin numero</a>
+            <a><i class="fa-solid fa-phone"></i>Teléfono: 951213123</a>
+            <a><i class="fa-solid fa-envelope"></i>Email: empresa&#64;gmail.com</a>
+        </div>
+        <div class="footer-section">
+            <h3>Redes sociales</h3>
+            <a href="https://www.facebook.com/share/aTPABdsH21XbWRYV/?mibextid=qi2Omg"><i class="fa-brands fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+            <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+        </div>
+    </div>
+    <p>&copy; 2024 Todos los derechos reservados.</p>
+  </footer>

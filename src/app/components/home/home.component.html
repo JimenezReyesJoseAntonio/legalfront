@@ -1,0 +1,128 @@
+<header  *ngIf="!isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+    </div>
+
+    <nav class="horizontal-nav">
+        
+            
+        
+        <a routerLink="/" class="nav-link">Inicio</a>
+        <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+    </nav>
+</header>
+
+<header *ngIf="isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+        <input *ngIf="isAdmin " type="file" (change)="uploadFileLogo($event)">
+
+    </div>
+    
+    <nav class="horizontal-nav">
+        <a routerLink="/admin/home" class="nav-link">Inicio</a>
+        <a routerLink="/admin/blog" class="nav-link">Blog</a>
+        <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Logout</a>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+    </nav>
+</header>
+
+<div class="nombre-empresa">
+    <h1>Contreras & Asociados</h1>
+</div>
+
+<div class="giro">
+    <h2>Área Legal</h2>
+</div>
+
+<!-- file.component.html -->
+<div class="container">
+    <div class="row">
+        <div class="col-half">
+            <!-- Carrusel -->
+            <div class="carousel-container">
+                <div *ngFor="let image of carouselImages; let i = index" class="carousel-slide" [style.display]="i === currentIndex ? 'block' : 'none'">
+                  <img [src]="image.url" [alt]="'Imagen ' + (i + 1)">
+                  <button class="centered-button" (click)="openModal(i)">Leer más</button>
+                  <label class="file-input-label">
+                    <div *ngIf="isAdmin">
+                        Actualizar Imagen {{ i + 1 }}
+                    </div>
+                  </label>
+                </div>
+                <button class="carousel-prev" (click)="prevSlide()">Anterior</button>
+                <button class="carousel-next" (click)="nextSlide()">Siguiente</button>
+                <button class="centered-service"routerLink="/servicios">Ir a Servicios</button>
+
+              </div>
+            </div>
+        <div class="col-half">
+            <!-- Imagen -->
+            <div class="image-container">
+                <img [src]="imageSrc" alt="Image" class="img-fluid">
+                <button class="centered-button" routerLink="/about">Conócenos</button>
+
+            </div>
+            <input *ngIf="isAdmin" type="file" (change)="uploadFile($event)" >
+
+        </div>
+    </div>
+
+    <!-- Modal Derecho -->
+<div class="modal" [ngClass]="{'show': selectedNoticia}" >
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <img [src]="selectedImageUrl" alt="Notice Image" class="modal-image">
+      <h2>{{ selectedNoticia?.title }}</h2>
+      <p>{{ selectedNoticia?.fullText }}</p>
+
+      <textarea  *ngIf="isAdmin && selectedNoticia" [(ngModel)]="selectedNoticia.title"></textarea>
+      <textarea *ngIf="isAdmin && selectedNoticia" [(ngModel)]="selectedNoticia.fullText"></textarea>
+      <button *ngIf="isAdmin && selectedNoticia" (click)="editPublication(selectedNoticia)">Save</button>
+      <input *ngIf="isAdmin && selectedNoticia" type="file"
+          (change)="onFileChange($event, selectedNoticia.id-1)">
+    </div>
+  </div>
+
+     <!-- Modal izquierdo -->
+<div class="modal" [ngClass]="{'show': selectedNoticiaIz}" >
+    <div class="modal-content">
+      <span class="close" (click)="closeModalIz()">&times;</span>
+      <img [src]="imageSrc" alt="Notice Image" class="modal-image">
+      <h2>{{ selectedNoticiaIz?.title }}</h2>
+      <p>{{ selectedNoticiaIz?.fullText }}</p>
+
+      <textarea  *ngIf="isAdmin && selectedNoticiaIz" [(ngModel)]="selectedNoticiaIz.title"></textarea>
+      <textarea *ngIf="isAdmin && selectedNoticiaIz" [(ngModel)]="selectedNoticiaIz.fullText"></textarea>
+      <button *ngIf="isAdmin && selectedNoticiaIz" (click)="editPublication(selectedNoticiaIz)">Save</button>
+      <input *ngIf="isAdmin && selectedNoticiaIz" type="file" (change)="uploadFile($event)" >
+    </div>
+  </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <a><i class="fa-solid fa-location-arrow"></i>Dirección: Calle sin numero</a>
+                <a><i class="fa-solid fa-phone"></i>Teléfono: 951213123</a>
+                <a><i class="fa-solid fa-envelope"></i>Email: empresa&#64;gmail.com</a>
+            </div>
+            <div class="footer-section">
+                <h3>Redes sociales</h3>
+                <a href="https://www.facebook.com/share/aTPABdsH21XbWRYV/?mibextid=qi2Omg"><i class="fa-brands fa-facebook"></i>Facebook</a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+                <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+            </div>
+        </div>
+        <p>&copy; 2024 Todos los derechos reservados.</p>
+      </footer>
+</div>

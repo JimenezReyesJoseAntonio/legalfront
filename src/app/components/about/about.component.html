@@ -1,0 +1,105 @@
+<header *ngIf="!isAdmin">
+  <div class="imaIz">
+    <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+</div>
+  <nav class="horizontal-nav">
+    <a routerLink="/" class="nav-link">Inicio</a>
+    <a routerLink="/blog" class="nav-link">Blog</a>
+    <a routerLink="/servicios" class="nav-link">Servicios</a>
+    <a routerLink="/about" class="nav-link">Acerca de</a>
+    <a routerLink="/login" class="nav-link">Login</a>
+    <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+  </nav>
+</header>
+
+<header *ngIf="isAdmin">
+  <div class="imaIz">
+    <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+</div>
+  <nav class="horizontal-nav">
+    <a routerLink="/admin/home" class="nav-link">Inicio</a>
+    <a routerLink="/admin/blog" class="nav-link">Blog</a>
+    <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+    <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+    <a routerLink="/login" class="nav-link">Logout</a>
+    <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
+  </nav>
+</header>
+
+<body>
+  <div class="header1">
+    <h1>Acerca de nosotros</h1>
+  </div>
+  <main *ngIf="informacionEmpresa">
+    <section class="about-us">
+      <p>{{ informacionEmpresa.about }}</p>
+    </section>
+    <section class="mission">
+      <h2>Misión</h2>
+      <p>{{ informacionEmpresa.mision }}</p>
+    </section>
+    <section class="vision">
+      <h2>Visión</h2>
+      <p>{{ informacionEmpresa.vision }}</p>
+    </section>
+
+    <div *ngIf="isAdmin" class="admin-form">
+      <form [formGroup]="informacionForm" (ngSubmit)="updateInformacionEmpresa()">
+        <div>
+          <label for="about">Acerca de Nosotros:</label>
+          <textarea id="about" formControlName="about"></textarea>
+        </div>
+        <div>
+          <label for="mision">Misión:</label>
+          <textarea id="mision" formControlName="mision"></textarea>
+        </div>
+        <div>
+          <label for="vision">Visión:</label>
+          <textarea id="vision" formControlName="vision"></textarea>
+        </div>
+        <button type="submit">Actualizar</button>
+      </form>
+    </div>
+
+  </main>
+  <div>
+    <h1>Nuestro equipo</h1>
+    <div *ngFor="let organigrama of organigramaData" class="publication-card">
+      <div>
+        <h2>{{ organigrama.nombre }}</h2>
+        <p>{{ organigrama.puesto }}</p>
+        
+        <textarea  *ngIf="isAdmin && organigrama" [(ngModel)]="organigrama.nombre"></textarea>
+        <textarea *ngIf="isAdmin && organigrama" [(ngModel)]="organigrama.puesto"></textarea>
+        <button *ngIf="isAdmin && organigrama" (click)="editPublication(organigrama)">Save</button>
+        <input *ngIf="isAdmin && organigrama" type="file"
+            (change)="onFileChange($event, organigrama.id+17)">
+      </div>
+      <img [src]="imagesCard[organigrama.id-1]?.url" alt="Publication Image" class="publication-image">
+    </div>
+  </div>
+  
+
+</body>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Contáctanos</h3>
+      <a><i class="fa-solid fa-location-arrow"></i>Dirección: Calle sin numero</a>
+      <a><i class="fa-solid fa-phone"></i>Teléfono: 951213123</a>
+      <a><i class="fa-solid fa-envelope"></i>Email: empresa&#64;gmail.com</a>
+    </div>
+    <div class="footer-section">
+      <h3>Redes sociales</h3>
+      <a href="https://www.facebook.com/share/aTPABdsH21XbWRYV/?mibextid=qi2Omg"><i class="fa-brands fa-facebook"></i>Facebook</a>
+      <a href="#"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+      <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+    </div>
+  </div>
+  <p>&copy; 2024 Todos los derechos reservados.</p>
+</footer>

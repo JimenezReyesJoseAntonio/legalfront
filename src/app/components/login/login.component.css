@@ -1,0 +1,106 @@
+/* Estilo principal del contenedor de login */
+.login {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo del encabezado */
+  .login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Estilo del formulario */
+  .login form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Estilo de los campos del formulario */
+  .login form div {
+    margin-bottom: 15px;
+  }
+  
+  /* Estilo de las etiquetas */
+  .login label {
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+  }
+  
+  /* Estilo de los inputs */
+  .login input[type="text"], .login input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .login input[type="text"]:focus, .login input[type="password"]:focus {
+    border-color: #007bff;
+  }
+  
+  /* Estilo del botón de login */
+  .login button[type="submit"] {
+    padding: 10px;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login button[type="submit"]:hover {
+    background: #0056b3;
+  }
+  
+  /* Estilo del contenedor de logout */
+  .login > div h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .login > div button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #dc3545;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login > div button:hover {
+    background: #c82333;
+  }
+  
+  /* Estilo responsivo */
+  @media (max-width: 600px) {
+    .login {
+      padding: 15px;
+      box-shadow: none;
+    }
+  
+    .login h2, .login > div h1 {
+      font-size: 20px;
+    }
+  
+    .login input[type="text"], .login input[type="password"], .login button[type="submit"], .login > div button {
+      font-size: 14px;
+    }
+  }
+  
